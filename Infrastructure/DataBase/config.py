@@ -16,8 +16,5 @@ class DataBase():
         collection = DB.fuego
         return collection
 
-db = DataBase('localhost', 27017)
-db.db_connection()
-# class Collection(DataBase):
-#     def collection(self):
-#         db_connection()
+#db = DataBase('localhost', 27017)
+#db.db_connection()

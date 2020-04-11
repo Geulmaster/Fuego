@@ -15,5 +15,5 @@ class Connect():
         except:
             print("Failed to login to server, please check the inserted credentials of {}".format(self.hostname))
 
-connection = Connect('host', 'user', 'passwd')
-connection.connect_to_target()
+#connection = Connect('host', 'user', 'passwd')
+#connection.connect_to_target()
