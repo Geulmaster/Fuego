@@ -4,6 +4,10 @@ import Fuego.Infrastructure.methods as methods
 from Fuego.Installer.servers_login import Connect
 import re
 
+hostname = "default"
+username = "default"
+password = "default"
+
 def input_formatter(source, seperators):
     return re.split('[{0}]'.format(re.escape(seperators)), source)
 
