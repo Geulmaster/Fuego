@@ -1,6 +1,9 @@
-import configparser
+from configparser import ConfigParser
+from pathlib import Path
+
 #from pexpect import pxssh
 from Overlord import ssh
+
 
 class Connect():
     """
@@ -23,9 +26,10 @@ class Connect():
 #connection = Connect('host', 'user', 'passwd')
 #connection.connect_to_target()
 def config_reader():
-    config = configparser.ConfigParser()
-    config.read('config.ini')
-    return config
+    config_file = Path(__file__).parent / 'config.ini'
+    parser = ConfigParser()
+    parser.read(config_file)
+    return parser
 
 configuration = config_reader()
 server = configuration['CREDENTIALS']

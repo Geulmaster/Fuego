@@ -2,6 +2,7 @@ import questionary
 import cmd
 import Fuego.Infrastructure.methods as methods
 from Fuego.Installer.servers_login import Connect
+from Kingfish.Core import logger
 import re
 
 hostname = "default"
@@ -13,22 +14,25 @@ def input_formatter(source, seperators):
 
 class General(cmd.Cmd):
 
-    def do_install(self):
+    def do_install(self, arg):
         methods.install()
 
     def do_config(self, *args):
-        inpt = args[0].replace(" ", ",")
-        credentials = input_formatter(inpt, ',')
-        hostname, username, password = credentials
-        validate = input("The credentials are: hostname: {}, username: {}, password: {}. Please confirm y/n ".format(hostname, username, password))
-        if validate == 'y' or validate == 'yes':
-            connection = Connect(str(hostname), str(username), str(password))
-            connection.connect_to_target()
-        else:
-            print("Operation aborted, please try again.")
+        try:
+            inpt = args[0].replace(" ", ",")
+            credentials = input_formatter(inpt, ',')
+            hostname, username, password = credentials
+            validate = input("The credentials are: hostname: {}, username: {}, password: {}. Please confirm y/n ".format(hostname, username, password))
+            if validate == 'y' or validate == 'yes':
+                connection = Connect(str(hostname), str(username), str(password))
+                connection.connect_to_target()
+            else:
+                logger.fatal("Operation aborted, please try again.")
+        except ValueError:
+            logger.fatal("You should insert credentials after the 'config' command")
 
-    def do_exit(self):
-        print("Bye!")
+    def do_exit(self, arg):
+        logger.info("Bye!")
         exit()
 
 run = General()
