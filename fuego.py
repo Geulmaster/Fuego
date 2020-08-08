@@ -1,7 +1,7 @@
 import questionary
 import cmd
 import Fuego.Infrastructure.methods as methods
-from Fuego.Installer.servers_login import Connect
+from Fuego.Installer.servers_login import Connection
 from Kingfish.Core import logger
 import re
 
@@ -24,7 +24,7 @@ class General(cmd.Cmd):
             hostname, username, password = credentials
             validate = input("The credentials are: hostname: {}, username: {}, password: {}. Please confirm y/n ".format(hostname, username, password))
             if validate == 'y' or validate == 'yes':
-                connection = Connect(str(hostname), str(username), str(password))
+                connection = Connection(str(hostname), str(username), str(password))
                 connection.connect_to_target()
             else:
                 logger.fatal("Operation aborted, please try again.")
